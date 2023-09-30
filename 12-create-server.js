@@ -1,8 +1,8 @@
-const http = require('http'); //imports node module
+const http = require('http'); //imports node http module
 
 const server = http.createServer((req, res)=>{ //creates webserver
     if (req.url === '/') { //checks the url of the current request
-        res.write('This is the home page of a dummy website for testing request response cycle in a web server'); //set response content
+        res.write('This is the home page of a dummy website for testing request response cycle in node web server'); //set response content
         res.end();
     }
     else if (req.url === '/about') {

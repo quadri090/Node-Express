@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path') //built in node path module
 
 console.log(path.sep)
 

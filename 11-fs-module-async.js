@@ -1,4 +1,4 @@
-const { readFile, writeFile } = require('fs')
+const { readFile, writeFile } = require('fs') //built in node file system in asynchronous mode
 
 readFile('./content/first.txt', 'utf8', (err, result) => {
     if (err) {
@@ -20,6 +20,7 @@ readFile('./content/first.txt', 'utf8', (err, result) => {
             return
         }
         console.log(result)
+        console.log(`${first} ${second}`)
     })
     })
 })

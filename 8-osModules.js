@@ -1,7 +1,7 @@
-// built in module
+// built in operating system(os) module
 const os = require('os')
 
-//info about user
+//info about current user
 const user = os.userInfo()
 console.log(user)
 

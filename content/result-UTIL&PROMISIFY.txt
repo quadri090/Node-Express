@@ -1,0 +1,3 @@
+THIS IS CREATED WITH NODE's BUILT IN UTIL AND PROMISIFY:
+Hello this is first text file
+Hello this is second text file
