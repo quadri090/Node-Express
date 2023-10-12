@@ -1,0 +1,23 @@
+controllers are used to de-clutter the routes files in this project. Essentially a file is created in the controlers folder with the js extension, so request methods are assigned to a constant variable which its value will be the traditional req and res callback function in any express/node method. the variable is then exported in its container file. and then imported in the app.js. it is then placed in the position where req and res callback will be after the path.
+
+
+
+//in the controller file
+
+const deCluttering = (req, res) => {
+    const {name} = req.body
+    if (!name) {
+        return res.status(400).json({success: false, msg: 'Please provide name value'})
+    }
+    res.status(201).send({success: true, data:[...people, name]}) 
+}
+
+module.exports = deCluttering
+
+
+
+//where the file is neeeded
+
+const deCluttering = require('./path-to-file)
+
+app.use('/api/people, deCluttering)

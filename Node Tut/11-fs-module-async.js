@@ -13,7 +13,8 @@ readFile('./content/first.txt', 'utf8', (err, result) => {
             return
     }
     const second = result;
-    writeFile('./content/result-async.txt', `Here is the result : ${first}, ${second}`
+
+    writeFile('./content/result-async.txt', `Here is the result : ${first}, ${second}` 
     ,(err, result) => {
         if (err) {
             console.log(err)
@@ -24,3 +25,4 @@ readFile('./content/first.txt', 'utf8', (err, result) => {
     })
     })
 })
+//asynchronouusly writing file does not require the {flag: 'a'}. it naturally overides whatever is in the file if the file already exists.

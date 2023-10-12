@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./normalize.css" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Javascript</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-center">
+        <h5>HTTP Methods</h5>
+        <div>
+          <a href="index.html">regular </a>
+          <a href="javascript.html">javascript </a>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <section>
+        <form>
+          <h3>Javascript Form</h3>
+          <div class="form-row">
+            <label for="name"> enter name </label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              class="form-input"
+              autocomplete="false"
+            />
+            <small class="form-alert"></small>
+          </div>
+          <button type="submit" class="block submit-btn">submit</button>
+        </form>
+        <div class="result"></div>
+      </section>
+    </main>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const result = document.querySelector('.result')
+
+      const fetchPeople = async () => {
+        try {
+          const { data } = await axios.get('/api/people')//gets the data object set up in the /api/people server path with get method
+
+          const people = data.data.map((person) => {//maps people object in data.js and retuns each key as a person
+            return `<h5>${person.name}</h5>`//retuns the value of each name key in people object from data.js
+          })
+          result.innerHTML = people.join('')//turns all the return statements into an array and appends them as the innerhtml of the div with result as its class on page load
+        } catch (error) {
+          result.innerHTML = `<div class="alert alert-danger">Can't Fetch Data</div>`//if theres an issue with fetching the data from the api,  the div with result as its class name returns a different text content
+        }
+      }
+      fetchPeople()
+      // submit form
+      const btn = document.querySelector('.submit-btn')
+      const input = document.querySelector('.form-input')
+      const formAlert = document.querySelector('.form-alert')
+      btn.addEventListener('click', async (e) => {
+        e.preventDefault()
+        const nameValue = input.value //variable declared with its value as the the input value of the form input field  
+
+        try {
+          const { data } = await axios.post('/api/people', { name: nameValue })//axios allows posting to an api/server with a key value pair object. Essentially, this sends the new object to our server/api
+
+          const h5 = document.createElement('h5')// new html tag created
+
+          h5.textContent = data.person// the api/server then returns the value of the object stored in a new key which is then appended as the textContent of the new html tag created in line above. key must be indetical on both frontend and server
+          result.appendChild(h5)//created html tag appended to div with class of result
+
+        } catch (error) {
+          // console.log(error.response)
+          formAlert.textContent = error.response.data.msg//gets error response from the server. note  that form input field can be validated on the fronend without the need to get the error message from the server
+        }
+        input.value = ''
+      })
+    </script>
+  </body>
+</html>

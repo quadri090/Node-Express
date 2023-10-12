@@ -12,21 +12,23 @@ const getText = (path) => {
     })
 } //this is a way to read file using javascript promise which takes the resolve and reject parameters 
 
+
+
 getText('../content/first.txt') //this call passes the specified file path to the getText function path parameter
 .then((result) => console.log(result)) //then it console logs the result if the path is correct
 .catch((err) => console.log(err)) //it catches and console logs the error if theres an error with the file path or the code base
 
-//to get the first and second files, we have to duplicate the function with the two different paths
+//to get the first and second txt files, we have to duplicate the function with the two different paths as seen above and below this comment
 
 getText('../content/second.txt')
 .then((result) => console.log(result))
 .catch((err) => console.log(err))
 
+
 // a different approach to getting the same results from the specified files will be:
 
-
-const start = async () => {
-    try { //try tries to catch an error if there's one in the nested code
+const start = async () => { //javascript async function
+    try { //try tries to catch an error if there's one in the block, returns the result if theres no error
         const first = await getText('../content/first.txt') //this call passes the specified file path to the getText function path parameter
         const second = await getText('../content/second.txt')
         console.log(`${first}\n${second}`)
